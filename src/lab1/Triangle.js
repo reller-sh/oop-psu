@@ -1,3 +1,5 @@
+import fp from 'lodash/fp'
+
 export default class Triangle {
 
     // private fields
@@ -11,6 +13,22 @@ export default class Triangle {
     }
 
     constructor(a, b, angle) {
+
+        if (
+            !fp.isNumber(a)
+            || !fp.isNumber(b)
+            || !fp.isNumber(angle)
+            || a <= 0
+            || b <= 0
+            || angle <= 0
+            || angle >= 180
+            || isNaN(a)
+            || isNaN(b)
+            || isNaN(angle)
+        ) {
+            throw new Error('Argument Error')
+        }
+
         this.#a = a
         this.#b = b
         this.#c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) - 2 * this.#b * this.#c * Math.cos(this.toRadians(angle)))
@@ -31,17 +49,26 @@ export default class Triangle {
     }
 
     calculateBisector = (angleName) => {
-        const [a, b] = angleName.split('')
-        return (2 * this[a]() * this[b]() * Math.cos(this.#angles[angleName] / 2)) / (this[a]() + this[b]())
+        const normalizedName = (fp.orderBy(null,'asc', angleName.split(''))).join('')
+        const [a, b] = normalizedName
+        return (2 * this[a]() * this[b]() * Math.cos(this.#angles[normalizedName] / 2)) / (this[a]() + this[b]())
     }
 
     calculateBisectorDelimiter = (angleName) => {
-        const lengthPow = Math.pow(this.calculateBisector(angleName), 2)
-        const [a, b] = angleName.split('')
+        const normalizedName = (fp.orderBy(null,'asc', angleName.split(''))).join('')
+        const [a, b] = normalizedName
+        const lengthPow = Math.pow(this.calculateBisector(normalizedName), 2)
 
         return lengthPow - (this[a]() * this[b]())
-
     }
+
+    increaseAngle = (k) => {
+
+        this.#c = Math.sqrt(Math.pow(this.#a, 2) + Math.pow(this.#b, 2) - 2 * this.#b * this.#c * Math.cos(this.#angles.ab * k))
+
+        this.calculateAngles()
+    }
+
 
     toDegrees(angle) {
         return Math.round(angle * (180 / Math.PI));

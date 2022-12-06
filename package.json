@@ -12,5 +12,9 @@
   "devDependencies": {
     "@swc/cli": "^0.1.57",
     "@swc/core": "^1.3.18"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "prompt-sync": "^4.2.0"
   }
 }

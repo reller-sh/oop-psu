@@ -1,14 +1,47 @@
+import fp from "lodash/fp";
+import prompt from 'prompt-sync';
+
+
+const newPrompt = prompt({sigint: true})
+
+
 import Triangle from "./Triangle";
 
 
 export const lab1 = () => {
 
+    let answer = 0;
     let triangles = []
 
-    const t = (new Triangle(2,3, 90))
 
-    console.log(t.toString())
-    console.log(t.calculateBisector('bc'))
-    console.log(t.calculateBisectorDelimiter('bc'))
-    // console.log((new Triangle(2,2, 90)   ).c())
+    while (answer !== -1) {
+        switch (answer){
+            case 0: {
+                const aSide = newPrompt("Input a side of triangle: ")
+                const bSide = newPrompt("Input b side of triangle: ")
+                const abAngle = newPrompt("Input aVb angle of triangle: ")
+                try {
+                    triangles.push(new Triangle(fp.toNumber(aSide), fp.toNumber(bSide), fp.toNumber(abAngle)))
+                } catch (e) {
+                    console.log(e.message)
+                }
+                break
+            }
+            case 1: {
+                const selectedInput = newPrompt(`Input index of triangle (${triangles.length}): `)
+                const methodInput = newPrompt(`input full name of method to call: `)
+                const methodArgsInput = newPrompt(`input arguments for method (separated by comma): `)
+
+
+                console.log(triangles[fp.toInteger(selectedInput)][methodInput](...methodArgsInput.split(',')))
+            }
+        }
+
+        answer = fp.toNumber(newPrompt(`
+Put command 
+ -1: exit;
+ 0: continue input triangles;
+ 1: call method(calculateBisector, calculateBisectorDelimiter) for one of Triangles
+`))
+    }
 }
