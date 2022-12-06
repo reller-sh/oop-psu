@@ -1,0 +1,16 @@
+{
+  "name": "oop-psu",
+  "version": "1.0.0",
+  "description": "psu oop labs",
+  "main": "src/index.js",
+  "author": "reller-sh",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "play": "npx swc ./src -d output && node output/index.js"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.3.18"
+  }
+}
