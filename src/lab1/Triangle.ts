@@ -3,10 +3,10 @@ import fp from 'lodash/fp'
 export default class Triangle {
 
     // private fields
-    #a = .0
-    #b = .0
-    #c = .0
-    #angles = {
+    private _a = .0
+    private _b = .0
+    private _c = .0
+    private _angles = {
         ab: .0,
         bc: .0,
         ca: .0,
@@ -29,29 +29,29 @@ export default class Triangle {
             throw new Error('Argument Error')
         }
 
-        this.#a = a
-        this.#b = b
-        this.#c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) - 2 * this.#b * this.#c * Math.cos(this.toRadians(angle)))
+        this._a = a
+        this._b = b
+        this._c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) - 2 * this._b * this._c * Math.cos(this.toRadians(angle)))
 
         this.calculateAngles()
     }
 
     // getters
-    a = () => (this.#a)
-    b = () => (this.#b)
-    c = () => (this.#c)
+    a = () => (this._a)
+    b = () => (this._b)
+    c = () => (this._c)
 
 
     calculateAngles() {
-        this.#angles.ab = Math.acos((Math.pow(this.#a, 2) + Math.pow(this.#b, 2) - Math.pow(this.#c, 2)) / (2 * this.#a * this.#b))
-        this.#angles.bc = Math.acos((Math.pow(this.#b, 2) + Math.pow(this.#c, 2) - Math.pow(this.#a, 2)) / (2 * this.#b * this.#c))
-        this.#angles.ca = Math.acos((Math.pow(this.#a, 2) + Math.pow(this.#c, 2) - Math.pow(this.#b, 2)) / (2 * this.#a * this.#c))
+        this._angles.ab = Math.acos((Math.pow(this._a, 2) + Math.pow(this._b, 2) - Math.pow(this._c, 2)) / (2 * this._a * this._b))
+        this._angles.bc = Math.acos((Math.pow(this._b, 2) + Math.pow(this._c, 2) - Math.pow(this._a, 2)) / (2 * this._b * this._c))
+        this._angles.ca = Math.acos((Math.pow(this._a, 2) + Math.pow(this._c, 2) - Math.pow(this._b, 2)) / (2 * this._a * this._c))
     }
 
     calculateBisector = (angleName) => {
         const normalizedName = (fp.orderBy(null,'asc', angleName.split(''))).join('')
         const [a, b] = normalizedName
-        return (2 * this[a]() * this[b]() * Math.cos(this.#angles[normalizedName] / 2)) / (this[a]() + this[b]())
+        return (2 * this[a]() * this[b]() * Math.cos(this._angles[normalizedName] / 2)) / (this[a]() + this[b]())
     }
 
     calculateBisectorDelimiter = (angleName) => {
@@ -64,7 +64,7 @@ export default class Triangle {
 
     increaseAngle = (k) => {
 
-        this.#c = Math.sqrt(Math.pow(this.#a, 2) + Math.pow(this.#b, 2) - 2 * this.#b * this.#c * Math.cos(this.#angles.ab * k))
+        this._c = Math.sqrt(Math.pow(this._a, 2) + Math.pow(this._b, 2) - 2 * this._b * this._c * Math.cos(this._angles.ab * k))
 
         this.calculateAngles()
     }
@@ -82,7 +82,7 @@ export default class Triangle {
         return `
 Triangle
     side: a=${this.a()}; b=${this.b()}; c=${this.c()};
-    angles: aVb=${this.toDegrees(this.#angles.ab)}; bVc=${this.toDegrees(this.#angles.bc)}; cVa=${this.toDegrees(this.#angles.ca)};  
+    angles: aVb=${this.toDegrees(this._angles.ab)}; bVc=${this.toDegrees(this._angles.bc)}; cVa=${this.toDegrees(this._angles.ca)};  
 `
     }
 }

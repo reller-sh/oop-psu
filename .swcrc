@@ -1,11 +1,11 @@
 {
   "jsc": {
     "parser": {
-      "syntax": "ecmascript",
-      "jsx": false
+      "syntax": "typescript",
+      "tsx": false
     },
     "target": "es2015",
-    "loose": false,
+    "loose": true,
     "minify": {
       "compress": {
         "arguments": false,
