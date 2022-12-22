@@ -19,7 +19,7 @@
         "dead_code": true,
         "directives": true,
         "drop_console": false,
-        "drop_debugger": true,
+        "drop_debugger": false,
         "evaluate": true,
         "expression": false,
         "hoist_funs": false,

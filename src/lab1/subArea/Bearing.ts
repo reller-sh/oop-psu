@@ -1,13 +1,14 @@
-export class Bearing {
+import {BaseItemObject} from "./BaseItemObject";
+
+export class Bearing extends BaseItemObject {
 
     private _internalDiameter = null
     private _externalDiameter = null
     private readonly _ballsCount = 10
     private wallThickness = 5
-    public width = null
 
     constructor(ext_diameter = 0, int_diameter= 0, width= 0, count = null) {
-
+        super('Bearing')
         if (ext_diameter > int_diameter + this.wallThickness) {
             this._externalDiameter = ext_diameter
             this._internalDiameter = int_diameter
