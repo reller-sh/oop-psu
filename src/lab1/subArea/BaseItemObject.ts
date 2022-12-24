@@ -1,7 +1,6 @@
 import {IsoType, IsoValues} from "./IsoValues";
 
 
-
 export class BaseItemObject {
     public width: number
     public height: number
@@ -13,6 +12,9 @@ export class BaseItemObject {
     constructor(type: IsoType) {
         this._values = new IsoValues()
 
+        this.width = 0
+        this.height = 0
+        this.length = 0
         this._values.type = type
     }
 

@@ -6,6 +6,7 @@ type LT = 1.5 | 1.75 | 2 | 2.25 | 2.5
 export class Gear extends BaseItemObject{
 
 
+    // @ts-ignore
     private _counterTeeth: number
     public lengthTeeth: LT
 

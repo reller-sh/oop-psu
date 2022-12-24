@@ -1,4 +1,3 @@
-import {subArea} from "./lab1/subArea";
+import {lab3} from "./lab3";
 
-
-subArea()
+lab3()

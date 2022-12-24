@@ -3,16 +3,16 @@ import fp from 'lodash/fp'
 export default class Triangle {
 
     // private fields
-    private _a = .0
-    private _b = .0
-    private _c = .0
+    private _a: number = .0
+    private _b: number = .0
+    private _c: number = .0
     private _angles = {
         ab: .0,
         bc: .0,
         ca: .0,
     }
 
-    constructor(a, b, angle) {
+    constructor(a: any, b: any, angle: any) {
 
         if (
             !fp.isNumber(a)
@@ -48,21 +48,21 @@ export default class Triangle {
         this._angles.ca = Math.acos((Math.pow(this._a, 2) + Math.pow(this._c, 2) - Math.pow(this._b, 2)) / (2 * this._a * this._c))
     }
 
-    calculateBisector = (angleName) => {
-        const normalizedName = (fp.orderBy(null,'asc', angleName.split(''))).join('')
+        calculateBisector = (angleName: string) => {
+        const normalizedName: Array<'a' | 'b' | 'c'> = (fp.orderBy('','asc', angleName.split('')) as any).join('')
         const [a, b] = normalizedName
-        return (2 * this[a]() * this[b]() * Math.cos(this._angles[normalizedName] / 2)) / (this[a]() + this[b]())
+        return (2 * this[a]() * this[b]() * Math.cos(this._angles["ab"] / 2)) / (this[a]() + this[b]())
     }
 
-    calculateBisectorDelimiter = (angleName) => {
-        const normalizedName = (fp.orderBy(null,'asc', angleName.split(''))).join('')
+    calculateBisectorDelimiter = (angleName: string) => {
+        const normalizedName: Array<'a' | 'b' | 'c'> = (fp.orderBy('','asc', angleName.split('')) as any).join('')
         const [a, b] = normalizedName
-        const lengthPow = Math.pow(this.calculateBisector(normalizedName), 2)
+        const lengthPow = Math.pow(this.calculateBisector(angleName), 2)
 
         return lengthPow - (this[a]() * this[b]())
     }
 
-    increaseAngle = (k) => {
+    increaseAngle = (k: any) => {
 
         this._c = Math.sqrt(Math.pow(this._a, 2) + Math.pow(this._b, 2) - 2 * this._b * this._c * Math.cos(this._angles.ab * k))
 
@@ -70,11 +70,11 @@ export default class Triangle {
     }
 
 
-    toDegrees(angle) {
+    toDegrees(angle: any) {
         return Math.round(angle * (180 / Math.PI));
     }
 
-    toRadians(angle) {
+    toRadians(angle: any) {
         return angle * (Math.PI / 180);
     }
 

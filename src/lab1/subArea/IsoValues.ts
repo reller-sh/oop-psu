@@ -7,6 +7,7 @@ export type ISize = Record<IsoType, Record<number, number>>
 
 export class IsoValues {
 
+    // @ts-ignore
     public type: IsoType;
 
     private _width: ISize = {
@@ -85,7 +86,9 @@ export class IsoValues {
         const findWidthIsoNumber = fp.findKey(inputSizes.width, _widths)
 
         return (
+            // @ts-ignore
             _heights[findWidthIsoNumber] === inputSizes.height
+            // @ts-ignore
             && _lengths[findWidthIsoNumber] === inputSizes.length
         )
     }

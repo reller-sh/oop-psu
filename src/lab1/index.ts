@@ -22,18 +22,18 @@ export const lab1 = () => {
                 const abAngle = newPrompt("Input aVb angle of triangle: ")
                 try {
                     triangles.push(new Triangle(fp.toNumber(aSide), fp.toNumber(bSide), fp.toNumber(abAngle)))
-                } catch (e) {
-                    console.log(e.message)
+                } catch ({message}) {
+                    console.log(message)
                 }
                 break
             }
             case 1: {
                 const selectedInput = newPrompt(`Input index of triangle (${triangles.length}): `)
-                const methodInput = newPrompt(`input full name of method to call: `)
+                const methodInputs = newPrompt(`input full name of method to call: `)
                 const methodArgsInput = newPrompt(`input arguments for method (separated by comma): `)
 
-
-                console.log(triangles[fp.toInteger(selectedInput)][methodInput](...methodArgsInput.split(',')))
+                // @ts-ignore
+                console.log(triangles[fp.toInteger(selectedInput)][methodInputs](...methodArgsInput.split(',')))
             }
         }
 

@@ -14,6 +14,7 @@ export class Bolt extends BaseItemObject{
 
     }
 
+    // @ts-ignore
     constructor(length, carvingDiameter, capDiameter, cw) {
 
         super('Bolt')

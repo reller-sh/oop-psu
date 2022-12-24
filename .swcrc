@@ -21,7 +21,7 @@
         "drop_console": false,
         "drop_debugger": false,
         "evaluate": true,
-        "expression": false,
+        "expression": true,
         "hoist_funs": false,
         "hoist_props": true,
         "hoist_vars": false,
@@ -60,5 +60,5 @@
     "type": "commonjs"
   },
   "minify": false,
-  "isModule": true
+  "isModule": true,
 }
