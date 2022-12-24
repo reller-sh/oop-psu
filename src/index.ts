@@ -3,6 +3,8 @@
 // lab4()
 
 
-import {lab5} from "./lab5";
+// import {lab5} from "./lab5";
+//
+// lab5()
 
-lab5()
+
